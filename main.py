@@ -1,8 +1,8 @@
 import random
 
-CODE_LENGTH = 4
-CODE_STAT = .4
-OLDER_CODE_STAT = -20
+CODE_LENGTH = 4 # Default length of the code that should be generated
+CODE_STAT = .4 # If the statistic of a number exceed it it will not be used.
+OLDER_CODE_STAT = -20 # Number of previous older code that is used for the statistics
 
 
 def create_random_code(length: int =CODE_LENGTH) -> str:
@@ -63,7 +63,6 @@ def load_used_codes(old_codes: str ="previous_codes.txt") -> list[str]:
 
 def create_older_codes_stat(codes: list[str]) -> map[int: float]:
     """Generate statistic of the numbers used in the previous code"""
-
     count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     stat = {0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0, 5: 0.0, 6: 0.0, 7: 0.0, 8: 0.0, 9: 0.0}
 
