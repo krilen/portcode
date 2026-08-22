@@ -90,8 +90,6 @@ def main(length):
     older_codes = load_used_codes() # The codes are a list of strings
     older_codes_stat = create_older_codes_stat(older_codes[OLDER_CODE_STAT:])
 
-    #print(older_codes_stat)
-
     while True:
         code = create_random_code(length) # Returned as a string!
 
@@ -112,7 +110,6 @@ def main(length):
                 break
 
         if not check_code_stat:
-            print("Skip that one", code)
             continue
 
         break
@@ -122,7 +119,7 @@ def main(length):
 
 if __name__ == "__main__":
 
-    input_length = input("Provide the legth of the code (default is 4) >> ")
+    input_length = input("Provide the length of the code (default is 4 numbers) >> ")
 
     if input_length == "":
         length = CODE_LENGTH
