@@ -25,13 +25,17 @@ def check_random_code(code: int) -> bool:
     code_str = str(code)
 
     # Make sure that the numbers ONLY repeats themself once
-    # ex: 0012: OK, 0011: Not OK, 0001: Not OK, ...
+    # ex: 0012: OK, 0011: Not OK, 0001: Not OK, 8808: OK, ...
     for i in range(len(code_str)):
         if i > 0:
+            # If the current number is equal to the previous number but is not set to repeat
             if code_str[i] == code[i -1] and not repeat :
                 repeat = True
+            # If the current number is equal to the previous number but is set to repeat
+            # Meaning 3 in a row or two pairs of different numbers (one one pair allowed)
+            # But 3 of the same number aslong as they are not in row is ok
             elif code_str[i] == code[i -1] and repeat :
-                verified = False  
+                verified = False
 
     return verified
 
@@ -93,12 +97,12 @@ def main(length):
     while True:
         code = create_random_code(length) # Returned as a string!
 
-        # Is the randomness of the code good enough
-        if not check_random_code(code):
-            continue
-
         # Make sure that the code has not been used before
         if code in older_codes:
+            continue
+
+        # Is the randomness of the code good enough
+        if not check_random_code(code):
             continue
 
         # Make sure that randomness of the numbers within the same code is spread out
@@ -128,8 +132,8 @@ if __name__ == "__main__":
         try: 
             length = int(input_length)
 
-        except ValueError as e:
-            print(f"Not a valid length, will use the default length!")
+        except ValueError:
+            print(f"!ERROR: Not a valid length, will use the default length!")
             length = CODE_LENGTH
 
     print("The random code that should be use is:", main(length))
